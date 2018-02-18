@@ -1,0 +1,55 @@
+<% if logged_in? %>
+
+<h1>ユーザー一覧</h1>
+
+<div class="containor">
+	<table class = "table table-hover" >
+		<thead>
+      <tr>
+        <th>名前</th>
+        <th>Email</th>
+        <th>年齢</th>
+        <th>性別</th>
+        <th>学校名</th>
+        <th>面接日時</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <% if user.name == nil %>
+              未登録
+            <% else %>
+              <%= user.name %>
+            <% end %></td>
+          <td> <%= user.email %></td>
+          <td> 
+            <% if user.birthdate == nil %>
+              未登録
+            <% else %>
+              <%= user.age %>
+            <% end %></td>
+          <td> <%= user.sex_i18n %></td>
+          <td> 
+            <% if user.school == nil %>
+              未登録
+            <% else %>
+              <%= user.school %>
+            <% end %></td>
+          <td> user.interview_time </td>
+          <td>ボタン</td>
+      	</tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% else %>
+  <div class="text-center">
+    <h1>ログイン/新規登録</h1>
+    <%= link_to '新規登録', signup_path, class: 'btn btn-lg btn-primary' %>
+    <%= link_to 'ログイン', login_path, class: 'btn btn-lg btn-primary' %>
+  </div>
+<% end %>
